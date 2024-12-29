@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCUTTA 사용자 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="bg-gray-100 font-sans nanum-gothic-regular">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-md z-10">
+        <div class="container mx-auto flex items-center justify-between py-4 px-6">
+            <button id="menu-toggle" class="text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+            <h1 class="text-xl font-bold nanum-gothic-bold">SCUTTA</h1>
+            <span class="text-gray-600 text-sm">2025년 1학기</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="mt-20 container mx-auto px-6">
+        <!-- 경기 결과 입력 -->
+        <section id="match-form" class="mb-12">
+            <h2 class="text-lg font-bold mb-4">경기 결과 입력</h2>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <form id="match-result-form">
+                    <div id="match-entries">
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <!-- Winner -->
+                            <div>
+                                <label for="winner" class="block text-sm font-medium text-gray-700">승리자</label>
+                                <input type="text" id="winner" name="winner" placeholder="선수 이름" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                            <!-- Set Score -->
+                            <div>
+                                <label for="set-score" class="block text-sm font-medium text-gray-700">세트 점수</label>
+                                <select id="set-score" name="set_score" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    <option value="3:0">3:0</option>
+                                    <option value="2:1">2:1</option>
+                                </select>
+                            </div>
+                            <!-- Loser -->
+                            <div>
+                                <label for="loser" class="block text-sm font-medium text-gray-700">패배자</label>
+                                <input type="text" id="loser" name="loser" placeholder="선수 이름" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center mt-6">
+                        <button type="button" id="add-match" class="px-6 py-2 bg-gray-300 text-black font-medium rounded-md shadow hover:bg-gray-400">+</button>
+                    </div>
+                    <div class="flex justify-center mt-6">
+                        <button type="submit" class="px-6 py-2 bg-blue-500 text-white font-medium rounded-md shadow hover:bg-blue-600">제출</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- 순위 표시 -->
+        <section id="leaderboard">
+            <h2 class="text-lg font-bold mb-4">부문별 순위</h2>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="flex space-x-4 mb-4">
+                    <button class="tab-btn px-4 py-2 bg-gray-200 rounded-md">최다 승리</button>
+                    <button class="tab-btn px-4 py-2 bg-gray-200 rounded-md">최다 패배</button>
+                    <button class="tab-btn px-4 py-2 bg-gray-200 rounded-md">최고 승률</button>
+                    <button class="tab-btn px-4 py-2 bg-gray-200 rounded-md">최다 경기</button>
+                    <button class="tab-btn px-4 py-2 bg-gray-200 rounded-md">최다 상대</button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 border">순위</th>
+                            <th class="px-4 py-2 border">부수</th>
+                            <th class="px-4 py-2 border">이름</th>
+                            <th class="px-4 py-2 border">점수</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body">
+                        <!-- 데이터가 동적으로 로드됩니다 -->
+                    </tbody>
+                </table>
+                <div class="mt-4 flex justify-between items-center">
+                    <button id="load-more" class="px-6 py-2 bg-blue-500 text-white font-medium rounded-md shadow hover:bg-blue-600">더보기</button>
+                    <input type="text" id="search-player" placeholder="이름 검색" class="px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm">
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</html>
